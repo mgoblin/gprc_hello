@@ -8,7 +8,7 @@ import (
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
-	pb "sberbank.ru/hello/hello"
+	pb "mg.ru/hello/hello"
 	"google.golang.org/grpc/testdata"
 )
 

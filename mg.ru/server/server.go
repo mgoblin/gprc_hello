@@ -17,7 +17,7 @@ import (
 
 	"github.com/golang/protobuf/proto"
 
-	pb "sberbank.ru/hello/hello"
+	pb "mg.ru/hello/hello"
 )
 
 var (
