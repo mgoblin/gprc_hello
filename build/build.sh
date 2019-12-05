@@ -15,8 +15,7 @@ echo "Mount container filesystem to $mnt"
 
 buildah copy $container server
 buildah config --entrypoint "/server" $container
-#echo "Try to run"
-#buildah run $container /server
+buildah config --port 10000
 
 
 
