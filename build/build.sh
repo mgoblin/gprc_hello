@@ -4,7 +4,7 @@
 
 echo "Build server.go"
 
-GOOS=linux CGO_ENABLED=0 go build -a ../mg.ru/hello/server/server.go
+GOOS=linux CGO_ENABLED=0 go build -a -ldflags="-s -w" ../mg.ru/hello/server/server.go
 
 echo "Build server container using buildah"
 
@@ -15,8 +15,8 @@ echo "Mount container filesystem to $mnt"
 
 buildah copy $container server
 buildah config --entrypoint "/server" $container
-echo "Try to run"
-buildah run $container /server
+#echo "Try to run"
+#buildah run $container /server
 
 
 
