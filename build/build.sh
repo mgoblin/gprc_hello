@@ -6,7 +6,7 @@ echo "Build server.go"
 
 GOOS=linux CGO_ENABLED=0 go build -a -ldflags="-s -w" ../mg.ru/hello/server/server.go
 
-echo "Build server container using buildah"
+echo "Build server container using ./buildah"
 
 container=$(buildah from scratch)
 echo "Create container $container"
