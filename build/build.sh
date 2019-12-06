@@ -13,18 +13,11 @@ echo "Create container $container"
 mnt=$(buildah mount $container)
 echo "Mount container filesystem to $mnt"
 
-buildah copy $container server
+buildah copy $container server /
 buildah config --entrypoint "/server" $container
-buildah config --port 10000
+buildah config --port 10000 $container
+buildah umount $container 
 
 
-
-img=$(buildah commit --squash $container grpc-hello-server)
+img=$(buildah commit --squash --rm $container grpc-hello-server)
 echo "Create image $img from container"
-
-
-buildah umount $container > /dev/null
-
-
-buildah rm $container > /dev/null
-buildah rmi $img > /dev/null
