@@ -20,4 +20,13 @@ buildah umount $container
 
 
 img=$(buildah commit --squash --rm $container grpc-hello-server)
-echo "Create image $img from container"
+echo "Create image $img from container" 
+
+host=$(oc get route default-route -n openshift-image-registry --template='{{ .spec.host }}')
+echo "Pushing image $img to image registry $host"
+buildah tag $img $host/grpc-hello-server/server
+oc login -u kubeadmin -p UMeRe-hBQAi-JJ4Bi-8ynRD
+oc project grpc-hello-server
+buildah login -u kubadmin -p $(oc whoami -t) --tls-verify=false $host
+buildah push --tls-verify=false $host/grpc-hello-server/server
+buildah logout $host

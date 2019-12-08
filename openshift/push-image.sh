@@ -11,10 +11,10 @@ fi
 
 img=$1
 
-
+echo "Pushing $img to image registry $host"
 oc login -u kubeadmin -p UMeRe-hBQAi-JJ4Bi-8ynRD
 oc project grpc-hello-server
 host=$(oc get route default-route -n openshift-image-registry --template='{{ .spec.host }}')
 podman login -u kubadmin -p $(oc whoami -t) --tls-verify=false $host
-
-echo "Pushing $img to image registry $host"
+podman push --tls-verify=false $host/grpc-hello-server/server
+podman logout $host
